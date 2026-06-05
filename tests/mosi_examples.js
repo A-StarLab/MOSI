@@ -14,6 +14,7 @@ function calculate(input) {
     stage: mosiS.stage,
     stageDisplay: mosiS.stageDisplay,
     tier: mosiT.tier,
+    target: mosiT.target,
     oScore: mosiS.oScore.score
   };
 }
@@ -27,7 +28,17 @@ const examples = [
   {
     name: "BMI 42 with hypertension only",
     input: { bmi: 42, hypertension: true },
-    expected: { mosiS: "M3-O1-Si0", stageDisplay: "Stage II", tier: "B" }
+    expected: { mosiS: "M3-O1-Si0", stageDisplay: "Stage II", tier: "B", target: 15 }
+  },
+  {
+    name: "BMI 42 with obstructive sleep apnea only",
+    input: { bmi: 42, sleepApnea: true },
+    expected: { mosiS: "M3-O1-Si0", stageDisplay: "Stage II", tier: "B", target: 15 }
+  },
+  {
+    name: "BMI 42 with IFG and T2DM counts dysglycemia once",
+    input: { bmi: 42, impairedFastingGlucose: true, type2Diabetes: true },
+    expected: { mosiS: "M3-O1-Si0", stageDisplay: "Stage II", tier: "C", target: 25, oScore: 1 }
   },
   {
     name: "BMI 48 with diabetes, neuropathy, OSA, and hypertension",
@@ -55,9 +66,14 @@ const examples = [
     expected: { mosiS: "M3-O0-Si3", stageDisplay: "Stage IV-B", tier: "D" }
   },
   {
-    name: "GERD alone changes tier but not O score",
+    name: "BMI 34 with GERD only stays foundational target",
     input: { bmi: 34, gerd: true },
-    expected: { mosiS: "M1-O0-Si0", stageDisplay: "Stage I", tier: "B", oScore: 0 }
+    expected: { mosiS: "M1-O0-Si0", stageDisplay: "Stage I", tier: "A", target: 7.5, oScore: 0 }
+  },
+  {
+    name: "BMI 42 with GERD only does not change target tier",
+    input: { bmi: 42, gerd: true },
+    expected: { mosiS: "M3-O0-Si0", stageDisplay: "Stage II", tier: "A", target: 7.5, oScore: 0 }
   }
 ];
 
@@ -66,6 +82,9 @@ for (const example of examples) {
   assert.strictEqual(actual.mosiS, example.expected.mosiS, example.name);
   assert.strictEqual(actual.stageDisplay, example.expected.stageDisplay, example.name);
   assert.strictEqual(actual.tier, example.expected.tier, example.name);
+  if (Object.prototype.hasOwnProperty.call(example.expected, "target")) {
+    assert.strictEqual(actual.target, example.expected.target, example.name);
+  }
   if (Object.prototype.hasOwnProperty.call(example.expected, "oScore")) {
     assert.strictEqual(actual.oScore, example.expected.oScore, example.name);
   }

@@ -35,7 +35,7 @@ MOSI-S combines M score, O score, and Si level.
 | Si2 | Major organ dysfunction including CKD without dialysis, cirrhosis, cardiac history/MACE-risk history, or prior stroke/TIA |
 | Si3 | Dialysis-dependent renal failure or solid-organ transplant recipient status |
 
-GERD is not part of O score.
+GERD/reflux is collected as a procedure-planning consideration. It does not contribute to O score, assign Tier B, or change the required weight-loss target.
 
 Stage assignment:
 
@@ -54,10 +54,14 @@ MOSI-T uses highest-tier-wins logic.
 
 | Tier | Target | Qualifying features |
 |---|---|---|
-| A | ≥7.5% TWL | No qualifying metabolic or organ comorbidity |
-| B | ≥15% TWL | OSA, hypertension, hyperlipidemia, GERD, arthropathy, or prior arthroplasty |
+| A | ≥7.5% TWL | Foundational weight-loss target; applies when no Tier B, C, or D target-defining feature is selected |
+| B | ≥15% TWL | OSA, hypertension, hyperlipidemia, arthropathy, or prior arthroplasty |
 | C | ≥25% TWL | Type 2 diabetes, impaired fasting glucose, or diabetic microvascular/end-organ disease |
 | D | ≥30% TWL | Cardiac history, stroke/TIA, Si2, or Si3 systemic disease |
+
+Impaired fasting glucose and type 2 diabetes count together as one dysglycemia component for O score. If both are selected, O score increases by 1, not 2.
+
+GERD/reflux may inform procedure discussion when options are otherwise clinically similar, but it is not a MOSI-S staging feature and is not a MOSI-T target-defining feature.
 
 ## MOSI-D Decision-Support Estimates
 

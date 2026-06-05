@@ -25,14 +25,14 @@ Add one point each for:
 - Obstructive sleep apnea
 - Hyperlipidemia
 
-O ranges from 0 to 4. GERD is not part of O score.
+O ranges from 0 to 4. Impaired fasting glucose and type 2 diabetes count together as one dysglycemia component, so selecting both increases O score by 1, not 2. GERD/reflux is not part of O score.
 
 ### Si Level
 
 | Level | Criteria |
 |---|---|
 | Si0 | No end-organ involvement |
-| Si1 | Diabetic microvascular/end-organ disease, including retinopathy, peripheral neuropathy, nephropathy, or diabetic vasculopathy |
+| Si1 | Diabetic microvascular/end-organ disease, including retinopathy, peripheral neuropathy, nephropathy, or vasculopathy (diabetes-related vascular/end-organ disease) |
 | Si2 | Major organ dysfunction, including CKD without dialysis, cirrhosis, cardiac history/MACE-risk history, or prior stroke/TIA |
 | Si3 | Organ failure, defined as dialysis-dependent renal failure or solid-organ transplant recipient status |
 
@@ -55,10 +55,12 @@ MOSI-T is the therapeutic weight-loss target framework. Highest tier wins.
 
 | Tier | Target | Criteria |
 |---|---|---|
-| A | ≥7.5% TWL | No qualifying metabolic/organ comorbidity |
-| B | ≥15% TWL | OSA, hypertension, hyperlipidemia, GERD, arthropathy, or prior arthroplasty |
+| A | ≥7.5% TWL | Foundational weight-loss target; applies when no Tier B, C, or D target-defining feature is selected |
+| B | ≥15% TWL | OSA, hypertension, hyperlipidemia, arthropathy, or prior arthroplasty |
 | C | ≥25% TWL | Type 2 diabetes, impaired fasting glucose, or diabetic microvascular/end-organ disease |
 | D | ≥30% TWL | Cardiac history, stroke/TIA, Si2, or Si3 systemic disease |
+
+GERD/reflux is collected as a procedure-planning consideration only. It does not assign Tier B, change MOSI stage, change O score, or change the required weight-loss target. It may inform discussion of bypass when procedure options are otherwise clinically similar, with bariatric surgeon judgment required.
 
 ## MOSI-D Decision-Support Display
 

@@ -216,7 +216,7 @@
     if (yes(input.retinopathy)) si1.push("Retinopathy");
     if (yes(input.neuropathy)) si1.push("Neuropathy");
     if (yes(input.nephropathy)) si1.push("Nephropathy");
-    if (yes(input.diabeticVasculopathy)) si1.push("Diabetic vasculopathy");
+    if (yes(input.diabeticVasculopathy)) si1.push("Vasculopathy");
     if (si1.length) {
       return {
         rank: 1,
@@ -289,14 +289,14 @@
     var microvascular = hasMicrovascular(input);
     var tier = "A";
     var target = TIER_TARGETS.A;
-    var reason = "No qualifying metabolic or organ comorbidity is present.";
-    var benefit = "Functional improvement, quality of life, and mechanical offloading may be discussed.";
+    var reason = "Foundational weight-loss target: no Tier B, C, or D target-defining feature is selected.";
+    var benefit = "Foundational weight-loss target to support clinical discussion.";
 
-    if (yes(input.sleepApnea) || yes(input.hypertension) || yes(input.hyperlipidemia) || yes(input.gerd) || yes(input.arthropathy) || yes(input.arthroplasty)) {
+    if (yes(input.sleepApnea) || yes(input.hypertension) || yes(input.hyperlipidemia) || yes(input.arthropathy) || yes(input.arthroplasty)) {
       tier = "B";
       target = TIER_TARGETS.B;
-      reason = "Tier B feature present: OSA, hypertension, hyperlipidemia, GERD, arthropathy, or prior arthroplasty.";
-      benefit = "May support discussion of sleep, cardiometabolic, reflux, or joint-related clinical goals.";
+      reason = "Tier B feature present: OSA, hypertension, hyperlipidemia, arthropathy, or prior arthroplasty.";
+      benefit = "May support discussion of sleep, cardiometabolic, or joint-related clinical goals.";
     }
 
     if (yes(input.type2Diabetes) || yes(input.impairedFastingGlucose) || microvascular) {
