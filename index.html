@@ -38,7 +38,7 @@
   --soft: #eaf1f9;
   --line: rgba(11, 26, 51, 0.12);
   --line-strong: rgba(11, 26, 51, 0.22);
-  --navy: #011433;
+  --navy: #031237;
   --navy-2: #0b2550;
   --on-navy: #f2f7fd;
   --on-navy-muted: #a9bdd6;
@@ -97,7 +97,7 @@ html[data-theme="light"] {
   --soft: #eaf1f9;
   --line: rgba(11, 26, 51, 0.12);
   --line-strong: rgba(11, 26, 51, 0.22);
-  --navy: #011433;
+  --navy: #031237;
   --navy-2: #0b2550;
   --on-navy: #f2f7fd;
   --on-navy-muted: #a9bdd6;
@@ -294,24 +294,29 @@ button {
   background: color-mix(in srgb, var(--accent-2) 26%, transparent);
 }
 
-.theme-icon-dark {
+.theme-icon-dark,
+.show-dark {
   display: none;
 }
 
-html[data-theme="dark"] .theme-icon-dark {
+html[data-theme="dark"] .theme-icon-dark,
+html[data-theme="dark"] .show-dark {
   display: block;
 }
 
-html[data-theme="dark"] .theme-icon-light {
+html[data-theme="dark"] .theme-icon-light,
+html[data-theme="dark"] .show-light {
   display: none;
 }
 
 @media (prefers-color-scheme: dark) {
-  html:not([data-theme="light"]) .theme-icon-dark {
+  html:not([data-theme="light"]) .theme-icon-dark,
+  html:not([data-theme="light"]) .show-dark {
     display: block;
   }
 
-  html:not([data-theme="light"]) .theme-icon-light {
+  html:not([data-theme="light"]) .theme-icon-light,
+  html:not([data-theme="light"]) .show-light {
     display: none;
   }
 }
@@ -1659,10 +1664,20 @@ html[data-theme="dark"] .field-row.is-on .impact-tag {
   gap: 8px;
 }
 
+.footer-logos {
+  align-items: center;
+}
+
 .footer-logos img {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 8px;
+}
+
+.footer-logos img.footer-lockup {
+  width: auto;
+  height: 50px;
+  border-radius: 0;
 }
 
 .footer-brand {
@@ -1777,7 +1792,7 @@ html[data-theme="dark"] .field-row.is-on .impact-tag {
 
 .affiliation-card {
   display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
+  grid-template-columns: 170px minmax(0, 1fr);
   gap: 12px;
   align-items: center;
   min-height: 118px;
@@ -2489,7 +2504,7 @@ html[data-theme="dark"] .field-row.is-on .impact-tag {
 <header class="site-header no-print">
   <div class="shell header-inner">
     <div class="brand-block">
-      <img class="brand-mark" src="assets/logos/aist-mark.png" alt="AIST Lab" width="46" height="46">
+      <img class="brand-mark" src="assets/logos/a-star-mark-light.png" alt="A-STAR Lab" width="46" height="46">
       <div class="brand-text">
         <h1>MOSI System</h1>
         <p>Obesity severity staging and bariatric research decision-support calculator</p>
@@ -2698,13 +2713,14 @@ html[data-theme="dark"] .field-row.is-on .impact-tag {
   <div class="shell footer-inner">
     <div class="footer-brand-row">
       <div class="footer-logos">
-        <img src="assets/logos/aist-logo-256.png" alt="Artificial Intelligence in Surgical Technologies (AIST) Lab logo" width="48" height="48" loading="lazy">
+        <img class="footer-lockup show-light" src="assets/logos/a-star-logo.png" alt="A-STAR: AI in Surgical Technology &amp; Augmentation Research" width="163" height="50" loading="lazy">
+        <img class="footer-lockup show-dark" src="assets/logos/a-star-logo-light.png" alt="A-STAR: AI in Surgical Technology &amp; Augmentation Research" width="163" height="50" loading="lazy">
         <img src="assets/logos/mayo-clinic-logo.png" alt="Mayo Clinic logo" width="48" height="48" loading="lazy">
       </div>
       <div>
         <div class="footer-brand">MOSI System</div>
         <div class="footer-meta">
-          <span>AIST Lab · Mayo Clinic</span>
+          <span>A-STAR Lab · Mayo Clinic</span>
           <span>Research decision-support calculator</span>
         </div>
       </div>
@@ -2732,10 +2748,10 @@ html[data-theme="dark"] .field-row.is-on .impact-tag {
       <div class="affiliation-grid">
         <article class="affiliation-card">
           <div class="logo-plate">
-            <img class="affiliation-logo" src="assets/logos/aist-logo-256.png" alt="Artificial Intelligence in Surgical Technologies Lab logo">
+            <img class="affiliation-logo" src="assets/logos/a-star-logo.png" alt="A-STAR: AI in Surgical Technology &amp; Augmentation Research logo">
           </div>
           <div>
-            <h4 class="affiliation-title">Artificial Intelligence in Surgical Technologies (AIST) Lab</h4>
+            <h4 class="affiliation-title">AI in Surgical Technology &amp; Augmentation Research (A&#8209;STAR) Lab</h4>
             <p class="affiliation-copy">Surgical innovation, artificial intelligence, and clinical decision-support research.</p>
           </div>
         </article>
@@ -2749,12 +2765,12 @@ html[data-theme="dark"] .field-row.is-on .impact-tag {
           </div>
         </article>
       </div>
-      <p class="method-note">The MOSI System was developed as a research decision-support platform affiliated with the Artificial Intelligence in Surgical Technologies (AIST) Lab and Mayo Clinic.</p>
+      <p class="method-note">The MOSI System was developed as a research decision-support platform affiliated with the AI in Surgical Technology &amp; Augmentation Research (A-STAR) Lab and Mayo Clinic.</p>
     </section>
 
     <section class="about-section">
       <h3>Development and affiliation</h3>
-      <p>Developed by the Artificial Intelligence in Surgical Technologies (AIST) Lab, Mayo Clinic.</p>
+      <p>Developed by the AI in Surgical Technology &amp; Augmentation Research (A-STAR) Lab, Mayo Clinic.</p>
       <p>The platform was developed as a research platform to support bariatric surgery phenotyping, clinical communication, and prospective validation.</p>
     </section>
 
@@ -3564,14 +3580,14 @@ html[data-theme="dark"] .field-row.is-on .impact-tag {
       '<div><h1 class="print-title">MOSI System</h1>' +
       '<p class="print-subtitle">Obesity severity staging and bariatric research decision-support calculator</p>' +
       '<p class="print-disclaimer">Research decision-support only. Not a substitute for clinical judgment.</p></div>' +
-      '<div class="print-affiliation">AIST Lab · Mayo Clinic</div>' +
+      '<div class="print-affiliation">A-STAR Lab · Mayo Clinic</div>' +
       "</header>";
   }
 
   function renderPrintFooter() {
     return '<footer class="print-footer">' +
       '<span>Static calculator; entered values are not stored or submitted.</span>' +
-      '<span>Developed by the Artificial Intelligence in Surgical Technologies (AIST) Lab, Mayo Clinic.</span>' +
+      '<span>Developed by the AI in Surgical Technology &amp; Augmentation Research (A-STAR) Lab, Mayo Clinic.</span>' +
       "</footer>";
   }
 
