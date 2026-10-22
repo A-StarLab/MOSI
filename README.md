@@ -91,6 +91,7 @@ The static lookup uses the final available v5.1 probability values. Exact 60-mon
 | `docs/MOSI_algorithm_spec.md` | Algorithm and research-results specification |
 | `tests/mosi_examples.js` | Example checks using the same shared logic as the app |
 | `assets/logos/` | AIST Lab and Mayo Clinic logos; `aist-mark.png` and `aist-logo-256.png` are small web versions of `aist-logo.png` |
+| `assets/fonts/` | Self-hosted Plus Jakarta Sans (variable, Latin subsets) and its SIL Open Font License |
 | `.github/workflows/deploy_pages.yml` | GitHub Pages deployment workflow |
 | `.nojekyll` | Prevents Jekyll processing on GitHub Pages |
 
