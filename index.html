@@ -5,10 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MOSI System</title>
 <style>
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("assets/fonts/plus-jakarta-sans-latin-ext-wght-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   color-scheme: light;
-  --font-display: "Inter Display", "Segoe UI Variable Display", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
-  --font-body: "Inter", "Segoe UI Variable Text", "Segoe UI", ui-sans-serif, system-ui, -apple-system, Arial, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Segoe UI Variable Display", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", "Segoe UI Variable Text", "Segoe UI", ui-sans-serif, system-ui, -apple-system, Arial, sans-serif;
   --font-mono: "Cascadia Mono", "SFMono-Regular", Menlo, Consolas, monospace;
   --font-sans: var(--font-body);
   --bg: #f3f6fa;
@@ -486,7 +504,8 @@ html[data-theme="dark"] .theme-icon-light {
   background: color-mix(in srgb, var(--panel-strong) 86%, var(--soft));
   color: var(--ink);
   padding: 8px 10px;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
   font-weight: 800;
 }
 
@@ -638,6 +657,51 @@ html[data-theme="dark"] .theme-icon-light {
   font-size: 0.76rem;
 }
 
+.impact-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.impact-tag {
+  --tag-color: var(--muted);
+  padding: 1px 7px;
+  border: 1px solid color-mix(in srgb, var(--tag-color) 40%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tag-color) 8%, var(--panel-strong));
+  color: color-mix(in srgb, var(--tag-color) 75%, var(--ink));
+  font-size: 0.68rem;
+  font-weight: 750;
+  line-height: 1.5;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.impact-tag.tag-o { --tag-color: var(--accent); }
+.impact-tag.tag-si1 { --tag-color: var(--amber); }
+.impact-tag.tag-si2,
+.impact-tag.tag-si3,
+.impact-tag.tag-sub { --tag-color: var(--rose); }
+.impact-tag.tag-tier-B { --tag-color: var(--indigo); }
+.impact-tag.tag-tier-C { --tag-color: var(--amber); }
+.impact-tag.tag-tier-D { --tag-color: var(--rose); }
+
+.field-row.is-on .impact-tag {
+  border-color: transparent;
+  background: var(--tag-color);
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .field-row.is-on .impact-tag {
+  color: #011433;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .field-row.is-on .impact-tag {
+    color: #011433;
+  }
+}
+
 .profile-helper {
   padding: 7px 14px 9px;
   border-bottom: 1px solid var(--line);
@@ -751,6 +815,7 @@ html[data-theme="dark"] .theme-icon-light {
   overscroll-behavior: contain;
   border-radius: var(--radius);
   scrollbar-width: thin;
+  scrollbar-gutter: stable;
 }
 
 .passport {
@@ -869,10 +934,16 @@ html[data-theme="dark"] .theme-icon-light {
   border-radius: 999px;
   background: var(--soft);
   color: var(--ink);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
   font-size: 0.76rem;
   font-weight: 950;
 }
+
+.tier-A { --tier-color: var(--green); }
+.tier-B { --tier-color: var(--indigo); }
+.tier-C { --tier-color: var(--amber); }
+.tier-D { --tier-color: var(--rose); }
 
 .stage-I { --stage-color: var(--green); }
 .stage-II { --stage-color: var(--indigo); }
@@ -938,9 +1009,9 @@ html[data-theme="dark"] .theme-icon-light {
   justify-self: start;
   min-height: 28px;
   padding: 4px 9px;
-  border: 1px solid color-mix(in srgb, var(--amber) 28%, var(--line));
+  border: 1px solid color-mix(in srgb, var(--tier-color, var(--amber)) 40%, var(--line));
   border-radius: 999px;
-  background: color-mix(in srgb, var(--amber) 12%, var(--panel-strong));
+  background: color-mix(in srgb, var(--tier-color, var(--amber)) 14%, var(--panel-strong));
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 0.78rem;
@@ -973,21 +1044,110 @@ html[data-theme="dark"] .theme-icon-light {
   font-weight: 650;
 }
 
-.severity-rail {
+.stage-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 128px;
+  gap: 10px;
+  align-items: center;
+}
+
+.stage-gauge {
+  display: grid;
+  gap: 2px;
+  justify-items: center;
+}
+
+.stage-gauge svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.gauge-seg {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 11;
+  stroke-linecap: butt;
+  transition: stroke 300ms ease;
+}
+
+.gauge-seg[data-rail="1"].active { stroke: var(--green); }
+.gauge-seg[data-rail="2"].active { stroke: var(--indigo); }
+.gauge-seg[data-rail="3"].active { stroke: var(--amber); }
+.gauge-seg[data-rail="4"].active { stroke: var(--rose); }
+
+.gauge-needle {
+  fill: var(--ink);
+  transform: rotate(var(--needle, -90deg));
+  transform-origin: 60px 60px;
+  transition: transform 700ms cubic-bezier(0.34, 1.45, 0.64, 1), opacity 300ms ease;
+}
+
+.stage-gauge.is-pending .gauge-needle {
+  opacity: 0.25;
+}
+
+.gauge-scale {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
-  padding: 0 14px 12px;
+  width: 100%;
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-align: center;
 }
 
-.rail-step {
-  height: 7px;
+.stage-delta {
+  justify-self: start;
+  margin: -2px 0 6px;
+  padding: 2px 8px;
   border-radius: 999px;
-  background: var(--line);
+  background: color-mix(in srgb, var(--stage-color) 16%, var(--panel-strong));
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 750;
+  animation: delta-in 320ms ease-out;
 }
 
-.rail-step.active {
-  background: var(--stage-color);
+.stage-delta[hidden] {
+  display: none;
+}
+
+.stage-delta.is-fading {
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+@keyframes delta-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes result-pop {
+  0% { transform: scale(0.94); opacity: 0.4; }
+  60% { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes panel-glow {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--stage-color) 45%, transparent), var(--shadow-soft); }
+  100% { box-shadow: 0 0 0 14px transparent, var(--shadow-soft); }
+}
+
+@keyframes bar-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.stage-hero.is-changed,
+.target-badge.is-changed {
+  transform-origin: left center;
+  animation: result-pop 480ms ease-out;
+}
+
+.passport.is-changed,
+.result-bar.is-changed {
+  animation: panel-glow 900ms ease-out;
 }
 
 .component-stack {
@@ -1019,7 +1179,8 @@ html[data-theme="dark"] .theme-icon-light {
   border-radius: 6px;
   background: color-mix(in srgb, var(--stage-color) 15%, var(--soft));
   color: var(--ink);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
   font-size: 0.94rem;
 }
 
@@ -1046,8 +1207,10 @@ html[data-theme="dark"] .theme-icon-light {
   min-width: 0;
   padding: 8px;
   border: 1px solid var(--line);
+  border-top: 3px solid color-mix(in srgb, var(--tier-color) 55%, var(--line));
   border-radius: var(--radius);
   background: var(--panel-strong);
+  transition: background 250ms ease, border-color 250ms ease, transform 250ms ease;
 }
 
 .ladder-step strong,
@@ -1061,14 +1224,17 @@ html[data-theme="dark"] .theme-icon-light {
 
 .ladder-step span {
   margin-top: 2px;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
   font-size: 0.92rem;
   font-weight: 950;
 }
 
 .ladder-step.active {
-  border-color: var(--stage-color);
-  background: color-mix(in srgb, var(--stage-color) 16%, var(--panel-strong));
+  border-color: var(--tier-color);
+  background: color-mix(in srgb, var(--tier-color) 16%, var(--panel-strong));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
 }
 
 .toolbar {
@@ -1203,7 +1369,8 @@ html[data-theme="dark"] .theme-icon-light {
 }
 
 .estimate-table tbody th {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
   font-size: 0.88rem;
   font-weight: 900;
 }
@@ -1257,6 +1424,7 @@ html[data-theme="dark"] .theme-icon-light {
   width: var(--bar-width);
   height: 100%;
   border-radius: inherit;
+  transform-origin: left center;
   background: var(--accent);
   transition: width 220ms ease;
 }
@@ -1266,7 +1434,8 @@ html[data-theme="dark"] .theme-icon-light {
 }
 
 .probability strong {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
   font-size: 0.86rem;
   font-variant-numeric: tabular-nums;
   text-align: right;
@@ -1690,7 +1859,8 @@ html[data-theme="dark"] .theme-icon-light {
   display: block;
   margin-top: 2px;
   color: var(--ink);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
   font-size: 0.94rem;
 }
 
@@ -1698,6 +1868,19 @@ html[data-theme="dark"] .theme-icon-light {
   border-left: 3px solid var(--accent);
   padding-left: 12px;
   color: var(--muted);
+}
+
+.estimate-table.is-fresh .bar-fill {
+  animation: bar-grow 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 .print-only {
@@ -2397,11 +2580,28 @@ html[data-theme="dark"] .theme-icon-light {
     <aside class="results-aside print-focus" aria-label="MOSI result panel">
       <section class="passport" id="passport">
         <div class="passport-top">
-          <div class="summary-stage-block">
-            <div class="stage-eyebrow">MOSI stage</div>
-            <div class="stage-hero is-pending" id="stageBadge" aria-label="MOSI stage pending">Pending</div>
-            <div class="mosi-code-small is-pending" id="mosiCode">MOSI code pending</div>
+          <div class="stage-row">
+            <div class="summary-stage-block">
+              <div class="stage-eyebrow">MOSI stage</div>
+              <div class="stage-hero is-pending" id="stageBadge" aria-label="MOSI stage pending">Pending</div>
+              <span class="stage-delta" id="stageDelta" hidden></span>
+              <div class="mosi-code-small is-pending" id="mosiCode">MOSI code pending</div>
+            </div>
+            <div class="stage-gauge" id="severityRail" role="img" aria-label="MOSI severity gauge: stage pending" style="--needle: -90deg">
+              <svg viewBox="0 0 120 68" aria-hidden="true" focusable="false">
+                <path class="gauge-seg" data-rail="1" d="M 14.00 60.00 A 46 46 0 0 1 26.36 28.63"/>
+                <path class="gauge-seg" data-rail="2" d="M 28.63 26.36 A 46 46 0 0 1 58.39 14.03"/>
+                <path class="gauge-seg" data-rail="3" d="M 61.61 14.03 A 46 46 0 0 1 91.37 26.36"/>
+                <path class="gauge-seg" data-rail="4" d="M 93.64 28.63 A 46 46 0 0 1 106.00 60.00"/>
+                <g class="gauge-needle">
+                  <path d="M 57.6 60 L 60 24 L 62.4 60 Z"/>
+                  <circle cx="60" cy="60" r="5"/>
+                </g>
+              </svg>
+              <div class="gauge-scale" aria-hidden="true"><span>I</span><span>II</span><span>III</span><span>IV</span></div>
+            </div>
           </div>
+          <p class="sr-only" id="resultAnnouncer" aria-live="polite"></p>
           <div class="badge-row stage-badges is-empty" id="substageRow">
             <span class="badge" id="substageBadge" aria-label="MOSI subgroup: none" hidden></span>
           </div>
@@ -2414,26 +2614,20 @@ html[data-theme="dark"] .theme-icon-light {
           <p class="planning-note" id="planningNote" hidden></p>
           <ul class="driver-list" id="driverList"></ul>
         </div>
-        <div class="severity-rail" id="severityRail" role="img" aria-label="MOSI severity rail: stage pending">
-          <span class="rail-step" data-rail="1" aria-hidden="true"></span>
-          <span class="rail-step" data-rail="2" aria-hidden="true"></span>
-          <span class="rail-step" data-rail="3" aria-hidden="true"></span>
-          <span class="rail-step" data-rail="4" aria-hidden="true"></span>
-        </div>
         <div class="target-ladder" id="targetLadder" role="list" aria-label="MOSI target ladder: tier pending">
-          <div class="ladder-step" role="listitem" data-tier="A" title="Foundational weight-loss target">
+          <div class="ladder-step tier-A" role="listitem" data-tier="A" title="Foundational weight-loss target">
             <strong>Tier A</strong>
             <span>&ge;7.5%</span>
           </div>
-          <div class="ladder-step" role="listitem" data-tier="B" title="Metabolic, sleep, or joint feature">
+          <div class="ladder-step tier-B" role="listitem" data-tier="B" title="Metabolic, sleep, or joint feature">
             <strong>Tier B</strong>
             <span>&ge;15%</span>
           </div>
-          <div class="ladder-step" role="listitem" data-tier="C" title="Glycemic or microvascular feature">
+          <div class="ladder-step tier-C" role="listitem" data-tier="C" title="Glycemic or microvascular feature">
             <strong>Tier C</strong>
             <span>&ge;25%</span>
           </div>
-          <div class="ladder-step" role="listitem" data-tier="D" title="Systemic or cardiovascular feature">
+          <div class="ladder-step tier-D" role="listitem" data-tier="D" title="Systemic or cardiovascular feature">
             <strong>Tier D</strong>
             <span>&ge;30%</span>
           </div>
@@ -2667,33 +2861,38 @@ html[data-theme="dark"] .theme-icon-light {
   var currentUnit = "metric";
   var currentBmiMode = "direct";
   var currentTimepoint = "month12";
+  var lastResult = null;
+  var lastEstimateKey = "";
+  var deltaTimers = [];
+  var STAGE_CLASSES = ["stage-I", "stage-II", "stage-III", "stage-IV", "stage-IV-A", "stage-IV-B"];
+  var TIER_CLASSES = ["tier-A", "tier-B", "tier-C", "tier-D"];
 
   var groups = {
     organ: [
-      { id: "hypertension", name: "Hypertension", subtitle: "O-score component and Tier B feature." },
-      { id: "hyperlipidemia", name: "Hyperlipidemia", subtitle: "O-score component and Tier B feature." },
-      { id: "sleepApnea", name: "Obstructive sleep apnea", subtitle: "O-score component and Tier B feature." },
-      { id: "impairedFastingGlucose", name: "Impaired fasting glucose", subtitle: "Dysglycemia component; qualifies Tier C." },
-      { id: "type2Diabetes", name: "Type 2 diabetes", subtitle: "Dysglycemia component; qualifies Tier C.", helper: "IFG and T2DM count together as one dysglycemia component." }
+      { id: "hypertension", name: "Hypertension" },
+      { id: "hyperlipidemia", name: "Hyperlipidemia" },
+      { id: "sleepApnea", name: "Obstructive sleep apnea" },
+      { id: "impairedFastingGlucose", name: "Impaired fasting glucose", subtitle: "Dysglycemia component." },
+      { id: "type2Diabetes", name: "Type 2 diabetes", subtitle: "Dysglycemia component.", helper: "IFG and T2DM count together as one dysglycemia component." }
     ],
     target: [
-      { id: "gerd", name: "GERD / reflux", subtitle: "Procedure-planning consideration; not part of O score or required weight-loss target." },
-      { id: "arthropathy", name: "Arthropathy", subtitle: "Mechanical Tier B feature." },
-      { id: "arthroplasty", name: "Prior arthroplasty", subtitle: "Mechanical Tier B feature." }
+      { id: "gerd", name: "GERD / reflux", subtitle: "Not part of O score or required weight-loss target." },
+      { id: "arthropathy", name: "Arthropathy", subtitle: "Mechanical feature." },
+      { id: "arthroplasty", name: "Prior arthroplasty", subtitle: "Mechanical feature." }
     ],
     micro: [
-      { id: "retinopathy", name: "Retinopathy", subtitle: "Diabetic microvascular/end-organ disease." },
-      { id: "neuropathy", name: "Neuropathy", subtitle: "Diabetic microvascular/end-organ disease." },
-      { id: "nephropathy", name: "Nephropathy", subtitle: "Diabetic microvascular/end-organ disease." },
-      { id: "diabeticVasculopathy", name: "Vasculopathy", subtitle: "Diabetes-related vascular/end-organ disease." }
+      { id: "retinopathy", name: "Retinopathy" },
+      { id: "neuropathy", name: "Neuropathy" },
+      { id: "nephropathy", name: "Nephropathy" },
+      { id: "diabeticVasculopathy", name: "Vasculopathy" }
     ],
     major: [
-      { id: "ckd", name: "CKD without dialysis", subtitle: "Si2 major organ dysfunction." },
-      { id: "transplant", name: "Solid organ transplant", subtitle: "Si3; Stage IV-A when dialysis is absent." },
-      { id: "cirrhosis", name: "Cirrhosis", subtitle: "Si2 major organ dysfunction." },
-      { id: "cardiac", name: "Cardiac history / MACE-risk history", subtitle: "Si2 systemic disease and Tier D feature." },
-      { id: "stroke", name: "Stroke/TIA", subtitle: "Si2 systemic disease and Tier D feature." },
-      { id: "dialysis", name: "Dialysis", subtitle: "Si3; Stage IV-B with or without transplant." }
+      { id: "ckd", name: "CKD without dialysis" },
+      { id: "transplant", name: "Solid organ transplant", subtitle: "Stage IV-A when dialysis is absent." },
+      { id: "cirrhosis", name: "Cirrhosis" },
+      { id: "cardiac", name: "Cardiac history / MACE-risk history" },
+      { id: "stroke", name: "Stroke/TIA" },
+      { id: "dialysis", name: "Dialysis", subtitle: "Stage IV-B, with or without transplant." }
     ]
   };
 
@@ -2757,6 +2956,8 @@ html[data-theme="dark"] .theme-icon-light {
     month60Button: document.getElementById("month60Button"),
     reportText: document.getElementById("reportText"),
     printReport: document.getElementById("printReport"),
+    stageDelta: document.getElementById("stageDelta"),
+    resultAnnouncer: document.getElementById("resultAnnouncer"),
     resultBar: document.getElementById("resultBar"),
     barStage: document.getElementById("barStage"),
     barMeta: document.getElementById("barMeta"),
@@ -2788,9 +2989,31 @@ html[data-theme="dark"] .theme-icon-light {
     return displayText(value).replace(/-/g, "–");
   }
 
+  // Tags are derived from the shared core logic, so they always match how the
+  // feature is actually scored rather than a hand-maintained description.
+  function impactTags(id) {
+    var input = {};
+    input[id] = true;
+    var tags = [];
+    var o = core.calculateOScore(input);
+    var si = core.calculateSiLevel(input);
+    var t = core.calculateMosiT(input, si);
+    if (o.score) tags.push({ cls: "tag-o", text: "O +1", title: "Adds one O-score component" });
+    if (si.rank) tags.push({ cls: "tag-si" + si.rank, text: si.label, title: "Systemic impairment " + si.label + ": " + si.reason });
+    if (si.subtype) tags.push({ cls: "tag-sub", text: si.subtype, title: "Descriptive Stage IV subgroup" });
+    if (t.tier !== "A") tags.push({ cls: "tag-tier-" + t.tier, text: "Tier " + t.tier, title: "Qualifies Tier " + t.tier + " target (≥" + formatTarget(t.target) + "% TWL)" });
+    if (!tags.length) tags.push({ cls: "", text: "Planning only", title: "Procedure-planning consideration; does not change stage or target" });
+    return tags;
+  }
+
   function fieldRow(field, groupName) {
+    var tags = impactTags(field.id).map(function (tag) {
+      return '<span class="impact-tag ' + tag.cls + '" title="' + escapeHtml(tag.title) + '">' + escapeHtml(tag.text) + "</span>";
+    }).join("");
     return '<label class="field-row condition-' + field.id + '" for="' + field.id + '">' +
-      '<span><span class="field-name">' + escapeHtml(field.name) + '</span><span class="field-subtitle">' + escapeHtml(field.subtitle) + '</span></span>' +
+      '<span><span class="field-name">' + escapeHtml(field.name) + "</span>" +
+      (field.subtitle ? '<span class="field-subtitle">' + escapeHtml(field.subtitle) + "</span>" : "") +
+      '<span class="impact-tags">' + tags + "</span></span>" +
       '<span class="switch"><input type="checkbox" id="' + field.id + '" data-group="' + groupName + '">' +
       '<span class="switch-face" aria-hidden="true"><span class="no">No</span><span class="yes">Yes</span></span></span>' +
       "</label>";
@@ -3048,6 +3271,9 @@ html[data-theme="dark"] .theme-icon-light {
   }
 
   function renderEstimates(stageDisplay, mosiT) {
+    var key = mosiT && stageDisplay ? stageDisplay + "|" + mosiT.tier + "|" + currentTimepoint : "";
+    if (key && key === lastEstimateKey) return;
+    lastEstimateKey = key;
     if (!mosiT || !stageDisplay) {
       els.estimateGrid.innerHTML = '<p class="estimate-empty">Enter BMI to compare retrospective estimates for SG, RYGB, and exploratory BPD-DS/SADI-S.</p>';
       els.targetNote.textContent = targetNote("");
@@ -3080,7 +3306,7 @@ html[data-theme="dark"] .theme-icon-light {
     if (allMissing.length) {
       footnotes.push("<p>No exact " + (currentTimepoint === "month60" ? "60-month" : "12-month") + " model estimate is available for " + escapeHtml(allMissing.join(", ")) + " TWL; values are not interpolated.</p>");
     }
-    els.estimateGrid.innerHTML = '<table class="estimate-table"><caption class="sr-only">Retrospective probability of achieving each total weight-loss threshold at ' + escapeHtml(timepointLabel(currentTimepoint)) + ", " + escapeHtml(stageDisplay) + "</caption>" +
+    els.estimateGrid.innerHTML = '<table class="estimate-table is-fresh"><caption class="sr-only">Retrospective probability of achieving each total weight-loss threshold at ' + escapeHtml(timepointLabel(currentTimepoint)) + ", " + escapeHtml(stageDisplay) + "</caption>" +
       '<thead><tr><th scope="col">TWL<span class="hide-narrow"> threshold</span></th>' + headers + "</tr></thead><tbody>" + rows + "</tbody></table>" +
       '<div class="estimate-footnotes">' + footnotes.join("") + "</div>";
     els.targetNote.textContent = targetNote(mosiT.tier) + " Supports discussion; requires bariatric surgeon judgment." +
@@ -3103,7 +3329,53 @@ html[data-theme="dark"] .theme-icon-light {
       step.classList.toggle("active", value <= rank);
     });
     if (els.severityRail) {
-      els.severityRail.setAttribute("aria-label", rank ? "MOSI severity rail: stage " + rank + " of 4" : "MOSI severity rail: stage pending");
+      // Each of the four arc segments spans 45 degrees; the needle points at the middle of the active one.
+      els.severityRail.style.setProperty("--needle", (rank ? -90 + (rank - 0.5) * 45 : -90) + "deg");
+      els.severityRail.classList.toggle("is-pending", !rank);
+      els.severityRail.setAttribute("aria-label", rank ? "MOSI severity gauge: stage " + rank + " of 4" : "MOSI severity gauge: stage pending");
+    }
+  }
+
+  function swapClass(el, family, next) {
+    family.forEach(function (name) { el.classList.remove(name); });
+    if (next) el.classList.add(next);
+  }
+
+  function replay(el, className) {
+    el.classList.remove(className);
+    void el.offsetWidth;
+    el.classList.add(className);
+  }
+
+  function showStageDelta(previous, current) {
+    deltaTimers.forEach(window.clearTimeout);
+    var before = stageRank(previous);
+    var after = stageRank(current);
+    var arrow = after > before ? "↑" : after < before ? "↓" : "↔";
+    els.stageDelta.textContent = arrow + " from " + previous;
+    els.stageDelta.classList.remove("is-fading");
+    els.stageDelta.hidden = false;
+    replay(els.stageDelta, "is-new");
+    deltaTimers = [
+      window.setTimeout(function () { els.stageDelta.classList.add("is-fading"); }, 2800),
+      window.setTimeout(function () { els.stageDelta.hidden = true; }, 3400)
+    ];
+  }
+
+  function noteResultChange(stageDisplay, mosiT) {
+    var previous = lastResult;
+    lastResult = { stage: stageDisplay, tier: mosiT.tier };
+    var stageChanged = !previous || previous.stage !== stageDisplay;
+    var tierChanged = !previous || previous.tier !== mosiT.tier;
+    if (stageChanged) {
+      replay(els.stageBadge, "is-changed");
+      replay(els.passport, "is-changed");
+      if (els.resultBar) replay(els.resultBar, "is-changed");
+      if (previous) showStageDelta(previous.stage, stageDisplay);
+    }
+    if (tierChanged) replay(els.tierBadge, "is-changed");
+    if (stageChanged || tierChanged) {
+      els.resultAnnouncer.textContent = "MOSI result: " + stageDisplay + ". Required weight-loss target " + targetSummary(mosiT) + ".";
     }
   }
 
@@ -3139,8 +3411,8 @@ html[data-theme="dark"] .theme-icon-light {
   function updateResultBar(mosiS, mosiT) {
     if (!els.resultBar) return;
     var complete = Boolean(mosiS && mosiS.complete && mosiT);
-    els.resultBar.className = "result-bar no-print" + (complete ? " " + stageClass(mosiS.stageDisplay) : " is-pending") +
-      (els.resultBar.classList.contains("is-hidden") ? " is-hidden" : "");
+    swapClass(els.resultBar, STAGE_CLASSES, complete ? stageClass(mosiS.stageDisplay) : "");
+    els.resultBar.classList.toggle("is-pending", !complete);
     if (complete) {
       els.barStage.textContent = mosiS.stageDisplay;
       els.barMeta.textContent = targetSummary(mosiT) + " · " + formatMosiCode(mosiS.summary);
@@ -3156,7 +3428,10 @@ html[data-theme="dark"] .theme-icon-light {
   function setIncomplete(mosiS) {
     var warning = Boolean(mosiS.warning);
     els.bmiWarning.classList.toggle("visible", warning);
-    els.passport.className = "passport";
+    lastResult = null;
+    deltaTimers.forEach(window.clearTimeout);
+    els.stageDelta.hidden = true;
+    swapClass(els.passport, STAGE_CLASSES, "");
     els.stageBadge.className = "stage-hero is-pending";
     els.stageBadge.textContent = warning ? "BMI below range" : "Pending";
     els.stageBadge.setAttribute("aria-label", warning ? "MOSI stage unavailable: BMI below range" : "MOSI stage pending");
@@ -3167,7 +3442,8 @@ html[data-theme="dark"] .theme-icon-light {
     els.substageBadge.hidden = true;
     els.substageRow.classList.add("is-empty");
     els.substageBadge.setAttribute("aria-label", "MOSI subgroup: none");
-    els.tierBadge.className = "target-badge is-pending";
+    swapClass(els.tierBadge, TIER_CLASSES, "");
+    els.tierBadge.classList.add("is-pending");
     els.tierBadge.textContent = "Tier pending";
     els.stageExplanation.textContent = warning ? mosiS.warning : "BMI required to calculate stage.";
     els.tierExplanation.textContent = "Weight-loss target appears after BMI is valid.";
@@ -3387,8 +3663,8 @@ html[data-theme="dark"] .theme-icon-light {
     var stageClassName = stageClass(stageDisplay);
 
     els.bmiWarning.classList.remove("visible");
-    els.passport.className = "passport " + stageClassName;
-    els.stageBadge.className = "stage-hero";
+    swapClass(els.passport, STAGE_CLASSES, stageClassName);
+    els.stageBadge.classList.remove("is-pending");
     els.stageBadge.textContent = mosiS.stageDisplay;
     els.stageBadge.setAttribute("aria-label", "MOSI stage: " + mosiS.stageDisplay);
     els.mosiCode.className = "mosi-code-small";
@@ -3398,7 +3674,8 @@ html[data-theme="dark"] .theme-icon-light {
     els.substageBadge.textContent = mosiS.subtype || "";
     els.substageRow.classList.toggle("is-empty", !mosiS.subtype);
     els.substageBadge.setAttribute("aria-label", "MOSI subgroup: " + (mosiS.subtype || "none"));
-    els.tierBadge.className = "target-badge tier-" + mosiT.tier;
+    swapClass(els.tierBadge, TIER_CLASSES, "tier-" + mosiT.tier);
+    els.tierBadge.classList.remove("is-pending");
     els.tierBadge.textContent = targetSummary(mosiT);
     els.stageExplanation.textContent = displayText(mosiS.explanation);
     els.tierExplanation.textContent = targetReason(mosiT);
@@ -3419,6 +3696,7 @@ html[data-theme="dark"] .theme-icon-light {
     renderReportCard(mosiS, mosiT, drivers);
     renderPrintReport(input, mosiS, mosiT);
     updateResultBar(mosiS, mosiT);
+    noteResultChange(stageDisplay, mosiT);
   }
 
   function setUnit(unit) {
